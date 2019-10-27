@@ -1,0 +1,49 @@
+---
+version: 2.1
+
+orbs:
+  executor-tools: feedyard/executor-tools@0.3.0
+  common: feedyard/common-pipeline-tasks@0.6.0
+
+workflows:
+  version: 2
+
+  feedyard-kube-bench-pipeline:
+    jobs:
+      - executor-tools/dev-release:
+          name: dev-release
+          context: executor-publishing
+          image: feedyard/feedyard-kube-bench
+          registry: quay.io
+          after-build:
+            - run:
+                name: configuration testing
+                command: |
+                  set -euo pipefail
+                  inspec exec --no-distinct-exit profiles/cis-docker
+                  CID="$(docker run -it -d --entrypoint ash quay.io/feedyard/feedyard-kube-bench:dev.$CIRCLE_SHA1)"
+                  inspec exec profiles/feedyard-kube-bench/ -t docker://$CID
+                  docker rm -f $CID
+          filters:
+            branches:
+              only: /master/
+            tags:
+              ignore: /.*/
+      - executor-tools/publish:
+          context: executor-publishing
+          image: feedyard/feedyard-kube-bench
+          registry: quay.io
+          after-publish:
+            - common/slack:
+                title: New Executor Version
+                message: new version published feedyard/feedyard-kube-bench $CIRCLE_TAG
+                webhook: SLACK_WEBHOOK
+          clean-tags:
+            - executor-tools/clean-quay:
+                image: feedyard/feedyard-kube-bench
+                bearer-token: QUAYIO_BEARER_TOKEN
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/

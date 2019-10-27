@@ -1,13 +1,13 @@
 FROM aquasec/kube-bench:latest
 
 # set user
-RUN addgroup -g 1000 -S kube-bench
-RUN adduser -u 1000 -S kube-bench -G kube-bench -s /bin/ash
+RUN addgroup -g 1000 -S kubebench
+RUN adduser -u 1000 -S kubebench -G kubebench -s /bin/ash
 
 # replace default cfg/config.yaml with customer that includes specific policy overrides and messages
 COPY cfg/ cfg/
 
-USER kube-bench
+USER kubebench
 ENTRYPOINT ["./entrypoint.sh"]
 
 # USER root

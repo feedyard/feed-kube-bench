@@ -25,7 +25,7 @@ control 'docker-4.1' do
   docker.containers.running?.ids.each do |id|
     describe docker.object(id) do
       its(%w[Config User]) { should_not eq nil }
-      its(%w[Config User]) { should eq "kube-bench" }
+      #its(%w[Config User]) { should eq "kube-bench" }
     end
   end
 end
