@@ -1,0 +1,8 @@
+---
+name: feedyard-kube-bench
+title: validate custom-policy use with kube-bench
+summary: Verify packages and docker-engine health
+version: 1.0.0
+maintainer: ncheneweth
+copyright: ncheneweth
+license: MIT

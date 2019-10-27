@@ -1,0 +1,6 @@
+*.env
+.ruby-version
+.idea/
+*.lock
+
+result_log.*
