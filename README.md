@@ -3,3 +3,6 @@ Example use of aquasec/kube-bench with customer policy decisions in tests
 
 Use as starting point for recurring kube-bench CIS conformance testing, adding custom policy checks to match
 enterprise configuration decisions.
+
+Customize `cfg/1.13/master.yaml` and `cfg/1.13/node.yaml` to match enterprise policy. The examples shown are for local
+development kubernetes and would not be appropriate for pipeline environment clusters.

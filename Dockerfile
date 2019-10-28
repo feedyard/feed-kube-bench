@@ -5,7 +5,8 @@ FROM aquasec/kube-bench:latest
 # RUN adduser -u 1000 -S kubebench -G kubebench -s /bin/ash
 
 # replace default cfg/config.yaml with customer that includes specific policy overrides and messages
-COPY cfg/ cfg/
+COPY cfg/1.13/master.yaml cfg/1.13/master.yaml
+COPY cfg/1.13/node.yaml cfg/1.13/node.yaml
 
 # USER kubebench
 ENTRYPOINT ["./entrypoint.sh"]

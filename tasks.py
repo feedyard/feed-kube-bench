@@ -8,4 +8,9 @@ def buildlocal(ctx):
 @task
 def testlocal(ctx):
     ctx.run("bash testlocal.sh")
-    
+
+@task
+def tagpush(ctx, tag):
+    """tag and push local build"""
+    ctx.run("docker tag local/feedyard-kube-bench:latest quay.io/feedyard/feedyard-kube-bench:{}".format(tag))
+    ctx.run("docker push quay.io/feedyard/feedyard-kube-bench:{}".format(tag))

@@ -18,3 +18,5 @@ control 'CIS-Docker-1.13.0-Benchmark-4.8' do
     its('stdout') { should eq "" }
   end
 end
+
+# insert file contents checks to compare build results with custom .yaml files
