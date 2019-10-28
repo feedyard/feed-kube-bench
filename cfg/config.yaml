@@ -74,6 +74,11 @@ master:
     defaultconf: /etc/sysconfig/flanneld
 
 node:
+  checks:
+    - id: 2.1.4
+      text: "Ensure that the --read-only-port argument is set to 0 (Scored)"
+      type: "skip"
+      scored: true
   components:
     - kubelet
     - proxy
