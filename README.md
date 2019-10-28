@@ -6,3 +6,7 @@ enterprise configuration decisions.
 
 Customize `cfg/1.13/master.yaml` and `cfg/1.13/node.yaml` to match enterprise policy. The examples shown are for local
 development kubernetes and would not be appropriate for pipeline environment clusters.
+
+### Explore
+
+Passing the checks yaml files to a standard image instead of building image with pre-configured checks.
